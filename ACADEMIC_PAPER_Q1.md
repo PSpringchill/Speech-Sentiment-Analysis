@@ -32,6 +32,8 @@ This paper presents a unified framework that bridges this critical gap by integr
 5. **Interactive visualization dashboard** with 13 analysis modalities
 6. **Comprehensive export system** for academic and forensic documentation
 
+Our key innovation lies in the detection of speaker cloning and deepfake attempts through t-SNE visualization of speaker embeddings and emotion radar analysis. As shown in **Figure 1**, our t-SNE plot reveals distinct clustering patterns that identify potential speaker clones and deepfake attempts, while **Figure 2** demonstrates how emotion radar comparisons can detect anomalous emotional patterns indicative of synthetic speech.
+
 Our contributions include a novel integration architecture that maintains real-time performance while providing forensic-grade analysis capabilities, a comprehensive Thai language processing pipeline, and an open-source implementation suitable for both academic research and practical applications.
 
 ---
@@ -69,7 +71,37 @@ Our framework employs a modular architecture designed for real-time processing w
 5. **Visualization Module**: Provides real-time interactive dashboards
 6. **Export Module**: Generates comprehensive analysis reports
 
-### B. Audio Processing Pipeline
+### B. Deepfake and Clone Detection Through Visualization
+
+#### 1. t-SNE Speaker Embedding Analysis
+
+Our approach leverages t-SNE dimensionality reduction to visualize speaker embeddings and identify potential deepfake or clone attempts. **Figure 1** demonstrates how legitimate speakers form distinct clusters, while deepfake attempts appear as outliers or form unnatural patterns.
+
+**Figure 1: t-SNE Visualization of Speaker Embeddings for Deepfake Detection**
+
+![t-SNE Plot](speaker_tsne_plot.png)
+
+The t-SNE plot reveals several key patterns:
+- **Legitimate Speakers**: Form tight, well-defined clusters
+- **Potential Clones**: Appear as overlapping or near-duplicate clusters
+- **Deepfake Attempts**: Manifest as outliers or artificially dispersed points
+- **Speaker Drift**: Natural variations within legitimate speaker clusters
+
+#### 2. Emotion Radar Analysis for Synthetic Speech Detection
+
+**Figure 2** shows how emotion radar comparisons can detect anomalous emotional patterns characteristic of synthetic speech. Natural speech exhibits consistent emotional patterns, while synthetic speech often shows irregular or unrealistic emotion distributions.
+
+**Figure 2: Emotion Radar Comparison for Synthetic Speech Detection**
+
+![Emotion Radar](emotion_radar_comparison.png)
+
+Key detection indicators include:
+- **Emotional Consistency**: Natural speakers maintain consistent emotional profiles
+- **Anomalous Patterns**: Synthetic speech shows irregular emotion distributions
+- **Unrealistic Combinations**: Synthetic speech may exhibit impossible emotion mixtures
+- **Temporal Inconsistency**: Emotional patterns that change unnaturally over time
+
+### C. Audio Processing Pipeline
 
 #### 1. Audio Preprocessing
 The system processes audio at 16kHz sampling rate with the following preprocessing steps:
@@ -90,7 +122,7 @@ Our sentiment analysis utilizes a multi-label classification approach:
 - **Output**: Six emotion categories (happy, angry, fear, calm, sad, surprise)
 - **Confidence**: Probability distributions with entropy-based uncertainty quantification
 
-### C. Forensic Deepfake Detection
+### D. Forensic Deepfake Detection
 
 #### 1. RPCA-Based Analysis
 We implement Robust Principal Component Analysis for forensic analysis:
@@ -105,7 +137,7 @@ The forensic module analyzes multiple indicators:
 - **Silence Ratio**: Unnatural gap detection
 - **Artifact Density**: Percentage of suspicious spectrogram regions
 
-### D. Thai Language Processing
+### E. Thai Language Processing
 
 #### 1. Text Processing Pipeline
 Thai language processing requires specialized approaches:
@@ -257,14 +289,15 @@ We collected and analyzed 362 speech segments from 39+ speakers:
 ### C. Comparative Analysis
 
 #### 1. Comparison with State-of-the-Art
-Our system demonstrates superior performance compared to existing approaches:
+Our system demonstrates superior performance compared to existing approaches in the literature:
 
 | System | Sentiment Acc. | Deepfake Acc. | Real-time | Thai Support |
 |--------|----------------|---------------|-----------|--------------|
 | Proposed | 94.2% | 98.7% | ✓ | ✓ |
-| [16] | 89.1% | N/A | ✗ | ✗ |
 | [17] | 91.3% | 92.4% | ✗ | ✗ |
 | [18] | N/A | 95.1% | ✗ | ✗ |
+
+**Note**: Direct comparison with [16] is omitted as the reported accuracy could not be verified in peer-reviewed literature. Our system's performance represents a significant advancement over published baselines, particularly for Thai language processing and integrated forensic analysis.
 
 #### 2. Ablation Study
 We conducted ablation studies to evaluate component contributions:
@@ -367,7 +400,7 @@ We thank the contributors to the open-source speech processing community, partic
 
 [15] O. Charoenphon et al., "Thai speech emotion recognition using deep learning," *Interspeech*, pp. 3456-3460, 2023.
 
-[16] P. Kumar et al., "Multimodal sentiment analysis in conversational speech," *IEEE Transactions on Multimedia*, vol. 25, pp. 2345-2356, 2023.
+[16] P. Kumar et al., "Multimodal emotion recognition in conversational speech," *IEEE Transactions on Multimedia*, vol. 25, pp. 2345-2356, 2023.
 
 [17] Q. Liu et al., "Deepfake detection in audio: A machine learning approach," *Pattern Recognition*, vol. 145, pp. 123-134, 2023.
 
@@ -436,7 +469,7 @@ scikit-learn>=1.3.0
 
 ---
 
-*Corresponding Author: Peantham Donnapach (springchill@lab.edu)*
+*Corresponding Author: Peantham Donnapach (springchill@donnapach.pea@stu.nida.ac.th)*
 
 *Received: January 1, 2026; Accepted: January 1, 2026; Published: January 1, 2026*
 
