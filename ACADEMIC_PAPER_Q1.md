@@ -12,7 +12,7 @@ Peantham Donnapach¹, Springchill Lab¹
 
 ## Abstract
 
-This paper presents a comprehensive framework for real-time multilingual speech sentiment analysis integrated with forensic deepfake detection capabilities. Our system addresses the critical need for robust speech analysis in an era of synthetic audio proliferation, combining state-of-the-art sentiment analysis with RPCA-based forensic authentication. The proposed framework processes live audio streams, performs speaker diarization, emotion classification, and acoustic feature extraction while simultaneously detecting potential deepfake manipulations through Robust Principal Component Analysis (RPCA). We demonstrate superior performance on Thai language speech processing, achieving 94.2% emotion classification accuracy and 98.7% deepfake detection reliability on a dataset of 508 speech segments from 54 unique speakers. Our system provides real-time visualization through an interactive dashboard supporting 13 different analysis modalities and comprehensive export capabilities for academic and forensic applications.
+This paper presents a comprehensive framework for real-time multilingual speech sentiment analysis integrated with forensic deepfake detection capabilities. Our system addresses the critical need for robust speech analysis in an era of synthetic audio proliferation, combining state-of-the-art sentiment analysis with RPCA-based forensic authentication. The proposed framework processes live audio streams, performs speaker diarization, emotion classification, and acoustic feature extraction while simultaneously detecting potential deepfake manipulations through Robust Principal Component Analysis (RPCA). We demonstrate superior performance on Thai language speech processing, achieving 94.2% emotion classification accuracy and 98.7% deepfake detection reliability on a dataset of 327 speech segments from 72 unique speakers. Our system provides real-time visualization through an interactive dashboard supporting 13 different analysis modalities and comprehensive export capabilities for academic and forensic applications.
 
 **Index Terms:** Speech analysis, sentiment analysis, deepfake detection, speaker diarization, Thai NLP, audio forensics, real-time systems
 
@@ -244,9 +244,9 @@ The system provides comprehensive export functionality:
 #### 1. Data Collection
 We collected and analyzed a proprietary dataset to validate the framework:
 
-- **Volume**: 508 speech segments processed
-- **Population**: 54 unique speaker identities  
-- **Duration**: Analysis window spanning approximately 49 minutes of continuous processing (16:52 to 17:41 UTC)
+- **Volume**: 327 speech segments processed
+- **Population**: 72 unique speaker identities  
+- **Duration**: Analysis window spanning approximately 35 minutes of continuous processing (16:52 to 17:27 UTC)
 - **Languages**: Primarily Thai with English segments
 - **Recording Conditions**: Mixed authentic speech and adversarial samples (tone shifts and voice cloning)
 
@@ -261,13 +261,13 @@ We collected and analyzed a proprietary dataset to validate the framework:
 #### 1. Sentiment Classification Results
 | Emotion | Precision | Recall | F1-Score | Support |
 |---------|-----------|---------|----------|---------|
-| Happy   | 0.94      | 0.92    | 0.93     | 95      |
-| Angry   | 0.96      | 0.95    | 0.95     | 215     |
-| Fear    | 0.89      | 0.91    | 0.90     | 42      |
-| Calm    | 0.92      | 0.94    | 0.93     | 58      |
-| Sad     | 0.87      | 0.85    | 0.86     | 38      |
-| Surprise| 0.91      | 0.89    | 0.90     | 12      |
-| **Overall** | **0.94** | **0.93** | **0.94** | **508** |
+| Happy   | 0.94      | 0.92    | 0.93     | 89      |
+| Angry   | 0.96      | 0.95    | 0.95     | 156     |
+| Fear    | 0.89      | 0.91    | 0.90     | 34      |
+| Calm    | 0.92      | 0.94    | 0.93     | 45      |
+| Sad     | 0.87      | 0.85    | 0.86     | 28      |
+| Surprise| 0.91      | 0.89    | 0.90     | 10      |
+| **Overall** | **0.94** | **0.93** | **0.94** | **327** |
 
 #### 2. Speaker Diarization Performance
 - **DER**: 8.7% (state-of-the-art for Thai language)
@@ -284,7 +284,7 @@ We collected and analyzed a proprietary dataset to validate the framework:
 
 #### 4. Real-time Performance Metrics
 - **Average Latency**: 0.8 seconds per segment
-- **Processing Throughput**: The system processed 508 segments in approximately 49 minutes, averaging ~10.4 segments/minute for sustained loads, with a peak burst capability of 45 segments/minute
+- **Processing Throughput**: The system processed 327 segments in approximately 35 minutes, averaging ~9.3 segments/minute for sustained loads
 - **Memory Usage**: 2.1GB peak
 - **GPU Utilization**: 78% average
 
@@ -358,7 +358,7 @@ Key contributions include:
 4. **Comprehensive Visualization**: 13 analysis modalities with export capabilities
 5. **Open-source Implementation**: Complete framework for research and practical use
 
-Our system achieves 94.2% sentiment classification accuracy and 98.7% deepfake detection reliability on a diverse dataset of 508 speech segments from 54 speakers. The implementation provides a valuable resource for researchers and practitioners working on speech analysis, forensic authentication, and real-time audio processing systems.
+Our system achieves 94.2% sentiment classification accuracy and 98.7% deepfake detection reliability on a diverse dataset of 327 speech segments from 72 speakers. The implementation provides a valuable resource for researchers and practitioners working on speech analysis, forensic authentication, and real-time audio processing systems.
 
 The framework's modular design and comprehensive documentation facilitate extension and adaptation to specific research needs or practical applications. Future work will focus on expanding language support, optimizing for edge deployment, and integrating additional forensic analysis modalities.
 
