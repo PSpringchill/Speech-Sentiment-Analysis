@@ -53,6 +53,9 @@ The models were evaluated based on their accuracy and other relevant metrics. Th
 To run this project, you need to have Python installed along with the required libraries. You can install the dependencies using the following command:
 
 ```bash
+python3.11 -m venv .venv311
+source .venv311/bin/activate
+ 
 pip install -r requirements.txt
 ```
 
@@ -69,6 +72,135 @@ cd Speech-Sentiment-Analysis
 ```
 
 3. Run the Jupyter notebooks provided to preprocess the data, extract features, and train the models.
+
+## Advanced Workflows
+
+### 1. Real-time Monitoring with Calibration & Enhancement
+To run the real-time analyzer with auto-bias correction and noise suppression:
+```bash
+.venv311/bin/python realtime_analysis.py \
+  --mode mic \
+  --asr thai \
+  --diarization \
+  --speaker-threshold 0.6 \
+  --mic-source-separation \
+  --auto-bias \
+  --dynamic-calibration \
+  --log-csv analysis_log.csv
+```
+*   **`--mic-source-separation`**: Uses DeepFilterNet to remove background noise and music in real-time.
+*   **Speaker Hints**: The console will show `[Match: High/Medium/Low]`. A `Medium` match often indicates a voice clone or a significant tone change.
+
+### 2. Speaker Diarization & Source Separation (Offline)
+For maximum accuracy on recordings with music:
+
+**Step A: Clean Audio (Optional but Recommended)**
+If the file has loud music, run diarization with source separation:
+```bash
+.venv311/bin/python realtime_analysis.py \
+  --mode watch \
+  --source-separation \
+  --input-dir path/to/recordings/
+```
+*   **`--source-separation`**: Uses Facebook Demucs (htdemucs) to isolate vocals before analysis.
+
+**Step B: Run Deep Diarization**
+Detects speaker turns using TitaNet-L and Multi-Scale Spectral Clustering.
+```bash
+.venv311/bin/python diarization_analysis.py path/to/audio.wav --out-dir results/
+```
+
+**Step B: Analyze Sentiment per Speaker**
+Processes the diarization output (RTTM) to track emotions for each individual speaker.
+```bash
+.venv311/bin/python diarized_sentiment.py \
+  --audio path/to/audio.wav \
+  --rttm results/input_manifest.rttm
+```
+.venv311/bin/python realtime_analysis.py \
+  --mode mic \
+  --asr thai \
+  --diarization \
+  --speaker-threshold 0.49 \
+  --auto-bias \
+  --dynamic-calibration \
+  --source-separation
+### 3. Advanced Visualization Dashboard (Advanced Reporting)
+To view an interactive, real-time "Intelligence Dashboard" of your analysis:
+
+**Step A: Start the Analyzer with Rich Logging**
+Ensure you specify a `--log-csv` path. The dashboard reads this file live.
+```bash
+.venv311/bin/python realtime_analysis.py \
+  --mode mic \
+  --asr thai \
+  --diarization \
+ --speaker-threshold 0.49 \
+  --log-csv analysis_log.csv \
+  --auto-bias \
+  --dynamic-calibration
+```
+
+**Step B: Launch the Interactive Dashboard**
+In a separate terminal window:
+```bash
+.venv311/bin/streamlit run visualize_report.py
+```
+
+**Dashboard Features:**
+*   **🕒 Timeline Analysis**: Track emotional shifts per speaker over time.
+*   **📊 Emotion Breakdown**: View total sentiment share and distribution.
+*   **👥 Speaker Analytics**: Analyze talk-time, emotional participation, and "Mood Volatility".
+*   **🕸️ Radar Comparison**: Compare the unique "Emotional Fingerprint" of different speakers.
+*   **🔤 Keyword Analysis**: Integrated Thai/English WordCloud to see what people are talking about.
+*   **📈 Correlation**: Analyze how vocal intensity (RMS) correlates with confidence and specific emotions.
+*   **🔬 Research Mode**: Generate and view publication-ready **t-SNE plots** directly from the sidebar.
+
+### 4. 🔬 Forensic Deepfake Detection System
+Advanced forensic analysis for detecting synthetic voice characteristics and AI-generated audio:
+
+**Step A: Run Forensic Analysis**
+Analyze existing sentiment data for deepfake indicators:
+```bash
+.venv311/bin/python forensic_pipeline.py --csv analysis_log.csv
+```
+
+**Step B: With Audio File (Enhanced Analysis)**
+For detailed signal-level analysis with spectrograms and pitch tracking:
+```bash
+.venv311/bin/python forensic_pipeline.py --csv analysis_log.csv --audio audio_file.wav
+```
+
+**Step C: Interactive Forensic Dashboard**
+Access forensic analysis through the Streamlit interface:
+```bash
+.venv311/bin/streamlit run visualize_report.py
+# Navigate to "🔬 Forensic Analysis" tab
+```
+
+**Forensic Features:**
+*   **🎵 Spectrogram Analysis**: High-frequency cutoff detection (16kHz threshold)
+*   **📈 Pitch Contour Tracking**: Jitter and step artifact identification
+*   **🔍 Bispectral Analysis**: Glitch density visualization for artifact isolation
+*   **📊 Advanced Metrics**: ZCR, spectral flatness, jitter/shimmer, breath events
+*   **🎯 t-SNE Clustering**: Real vs suspected clone color coding with outlier detection
+*   **📋 Forensic Dossier**: Comprehensive JSON reports replacing CSV exports
+*   **⚠️ Risk Assessment**: HIGH/MEDIUM/LOW/MINIMAL threat classifications
+*   **🔧 Automated Evidence Generation**: Suspicious segment compilation and recommendations
+
+**Detection Indicators:**
+- **Synthetic Voice Signs**: Unnatural pitch patterns, spectral anomalies
+- **Voice Clone Detection**: Speaker embedding outliers and identity inconsistencies  
+- **Artifact Isolation**: Bispectral glitch detection and high-frequency shelf analysis
+- **Breathing Patterns**: Abnormal breath event counts and pause ratios
+- **Rhythm Analysis**: Unnatural speech timing and cadence detection
+
+**Output Files:**
+- `forensic_dossier.json` - Complete forensic analysis report
+- `forensic_clusters.png` - t-SNE speaker clustering visualization
+- `forensic_metrics.png` - Forensic metrics distribution analysis
+- `suspicion_analysis.png` - Suspicion score breakdown
+- `speaker_analysis.png` - Speaker-specific risk assessment
 
 ## License
 This project is licensed under the [MIT License](LICENSE).

@@ -1,0 +1,35 @@
+============================================================
+AUDIO X-RAY FORENSIC REPORT
+============================================================
+File: test_sample.wav
+Duration: 2.00 seconds
+Sample Rate: 44100 Hz
+
+RPCA DECOMPOSITION:
+  Low-Rank Matrix Shape: (1025, 173)
+  Sparse Matrix Shape: (1025, 173)
+  Lambda Parameter: 1.0
+
+ARTIFACT ANALYSIS:
+  Deepfake Likelihood: 25.00%
+  Rhythmicity Score: 0.0000
+  Phase Blast Score: nan
+  Silence Ratio: 100.00%
+  Artifact Density: 0.00%
+  Periodicity Score: 0.0000
+
+DEEPFAKE INDICATORS DETECTED:
+  ⚠️  Excessive silence (missing breaths)
+
+EVIDENCE ASSESSMENT:
+  🟢 LOW PROBABILITY of synthetic voice
+  Recommendation: Likely authentic voice
+
+GENERATED FILES:
+  Artifact Audio: audio_xray_test/test_sample_artifacts_only.wav
+  Full Analysis: audio_xray_test/test_sample_rpca_analysis.png
+  Artifact Detail: audio_xray_test/test_sample_artifact_detail.png
+
+============================================================
+END OF REPORT
+============================================================

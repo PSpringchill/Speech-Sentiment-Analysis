@@ -1,0 +1,28 @@
+============================================================
+AUDIO X-RAY CSV ANALYSIS REPORT
+============================================================
+Source: analysis_log.csv
+Segments Analyzed: 10
+Analysis Date: 2026-01-01 00:02:48.222175
+
+OVERALL METRICS:
+  Average Deepfake Likelihood: 0.00%
+  Average Rhythmicity Score: 0.0000
+  Average Silence Ratio: 0.00%
+
+SPEAKER BREAKDOWN:
+  Speaker_0: 1 segments, 0.00% avg likelihood
+  Speaker_0 [Match: Medium - Check for Clone: 3 segments, 0.00% avg likelihood
+  Speaker_0 [Match: Low - Tone Change?: 5 segments, 0.00% avg likelihood
+  Speaker_1: 1 segments, 0.00% avg likelihood
+
+RECOMMENDATIONS:
+  ✅ LOW RISK: Most segments appear authentic
+
+  - Review segments with highest deepfake likelihood scores
+  - Consider additional analysis for suspicious patterns
+  - Monitor for consistent speaker characteristics over time
+
+============================================================
+END OF REPORT
+============================================================
